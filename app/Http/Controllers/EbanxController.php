@@ -8,7 +8,6 @@ use App\Service\EbanxService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
-use Psy\Util\Json;
 
 class EbanxController extends Controller
 {
@@ -26,22 +25,24 @@ class EbanxController extends Controller
 
         $service = $this->service()->balanceService($accountId);
 
+
         return new JsonResponse($service[1], $service[0]);
     }
 
     public function event(Request $request)
     {
         $type = $request->input('type');
-        $destination = $request->input('destination');
+        $destination = $request->input('destination') ?? '';
         $amount = $request->input('amount');
+        $origin = $request->input('origin') ?? '';
 
         if (!isset($type) || !isset($destination) || !isset($amount)) {
             return new JsonResponse('Um ou mais campos não foram informados no payload', 404);
         }
 
-        $service = $this->service()->eventService($type, $destination, $amount);
+        $service = $this->service()->eventService($type, $destination, $origin, $amount);
 
-        return new JsonResponse($service[1], $service[0]);
+        return new JsonResponse($service['balance'], $service['status']);
     }
 
     public function service()
