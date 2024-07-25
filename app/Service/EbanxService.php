@@ -12,10 +12,9 @@ class EbanxService
 {
     public function resetService()
     {
-        $account = new Account();
-        $account->delete();
+        DB::delete('DELETE FROM account');
 
-        return 'OK';
+        return ["status" => 200, "msg" => 'OK'];
     }
 
     public function balanceService(int $accountId = 0)

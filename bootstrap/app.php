@@ -13,13 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: [
-            'localhost/*',
-            'http://localhost:8000/web/*',
-            'http://localhost/web/*',
-            'http://127.0.0.1:4040/web/*',
-            'http://127.0.0.1:8000/web/*',
-            'http://127.0.0.1/web/*',
-            'https://9694-187-25-141-147.ngrok-free.app/web/*'
+            '/reset',
+            '/balance',
+            '/event'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

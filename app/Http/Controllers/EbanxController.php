@@ -13,7 +13,8 @@ class EbanxController extends Controller
 {
     public function reset()
     {
-        return new JsonResponse($this->service()->resetService(), 200);
+        $service = $this->service()->resetService();
+        return new JsonResponse($service['msg'], $service['status']);
     }
 
     public function balance(Request $request)
