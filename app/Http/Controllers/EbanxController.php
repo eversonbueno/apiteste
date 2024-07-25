@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Service\EbanxService;
+use http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -13,8 +14,10 @@ class EbanxController extends Controller
 {
     public function reset()
     {
-        $service = $this->service()->resetService();
-        return new JsonResponse($service['msg'], $service['status']);
+        $this->service()->resetService();
+
+        return 'OK';
+
     }
 
     public function balance(Request $request)

@@ -14,7 +14,7 @@ class EbanxService
     {
         DB::delete('DELETE FROM account');
 
-        return ["status" => 200, "msg" => 'OK'];
+        return ["status" => 200, "msg" => "OK"];
     }
 
     public function balanceService(int $accountId = 0)
